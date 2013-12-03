@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/whatIsAfrica.css" type="text/css">
+  <!-- bootstrap -->
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+  <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+  <script src="bootstrap/js/bootstrap.js"></script>
+
+  <!-- d3 datamaps -->
+  <script type="text/javascript" src="js/d3-master/d3.js"></script>
+  <script src="js/topojson-master/topojson.js"></script>
+  
+  <script src="js/datamaps.world.min.js"></script>
+
+  <style type="text/css">
+    
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>What is <span class=''>Africa</span>?</h1>
+    <div id="container1"></div>    
+     <script>
+       //basic map config with custom fills, mercator projection
+      var map = new Datamap({
+        scope: 'world',
+        element: document.getElementById('container1'),
+        //projection: 'mercator',
+        
+        setProjection: function(element, options) {
+            var projection, path;
+            projection = d3.geo.mercator()
+                .scale(300)
+                .translate([160, 250]);
+            path = d3.geo.path()
+                .projection( projection );
+
+            return {path: path, projection: projection};
+        },
+        fills: {
+          defaultFill: 'rgba(0,0,0,0)',
+          yes: '#f0af0a',
+          no: 'rgba(0,0,0,0.1)'
+        },
+        
+        data: {
+          ZAF: {
+            fillKey: 'yes',
+            country: "South Africa",
+          },
+          SEN: {
+            fillKey: 'yes',
+            country: "Senegal",
+          },
+          BEN: {
+            fillKey: 'yes',
+            country: "Benin",
+          },
+        }
+      })
+     </script>
+  </div>
+</body>
